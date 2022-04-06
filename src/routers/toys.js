@@ -2,10 +2,8 @@ const express = require('express')
 const Toy = require('../models/toys')
 const auth = require('../middleware/auth')
 const router = new express.Router()
-router.post('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
-    const task = new Toy({
-        ...req.body
-    })
+router.post('http://127.0.0.1:3000/toys', auth, async (req,res)=>{
+    const toy = new Toy(req.body)
     try {
         await toy.save()
         res.status(201).send(toy)
@@ -13,7 +11,7 @@ router.post('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
         res.status(400).send(error)
     }
 })
-router.get('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
+router.get('http://127.0.0.1:3000/toys', auth, async (req,res)=>{
     const name = req.query.name
     try {
         const toy = await Toy.findOne({name})
@@ -26,7 +24,7 @@ router.get('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
     }
 })
 
-router.patch('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
+router.patch('http://127.0.0.1:3000/toys', auth, async (req,res)=>{
     const updates = Object.keys(req.body)
     const allowedUpdates = ['description']
     const isAllowed = updates.every((update)=>{
@@ -51,7 +49,7 @@ router.patch('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
     }
 })
 
-router.delete('http://127.0.0.1:5500/toys', auth, async (req,res)=>{
+router.delete('http://127.0.0.1:3000/toys', auth, async (req,res)=>{
     const name = req.query.name
     try {
         const toy = await Toy.findOneAndDelete({name})

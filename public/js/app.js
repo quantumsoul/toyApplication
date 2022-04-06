@@ -22,10 +22,19 @@ login.addEventListener('submit',(e)=>{
     }
     message1.textContent = 'loading'
     const l = 'http://127.0.0.1:3000/login'
-    fetch(l,{
+    fetch('http://127.0.0.1:3000/login',{
         method: 'POST',
-        body: data
-    }).then((response)=>response.json()).then((data)=>{}).catch((error)=>{
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+
+        body: JSON.stringify(data)
+    }).then((response)=>response.json()).then((data)=>{
+        if(data!==undefined){
+            message1.textContent = 'logged in successfully'
+        }
+    }).catch((error)=>{
         message1.textContent = error
     })
 })
@@ -46,6 +55,10 @@ signup.addEventListener('submit',(e)=>{
     const l = 'http://127.0.0.1:3000/signup'
     fetch('http://127.0.0.1:3000/signup',{
         method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
         body: JSON.stringify(data)
     }).then((response)=>response.json()).then((data)=>{}).catch((error)=>{
         message1.textContent = error
@@ -56,12 +69,17 @@ search.addEventListener('submit',(e)=>{
     const name = searchName.value
     message1.textContent = 'loading'
     const l = 'http://127.0.0.1:3000/toys?name=' + name
-    fetch(l).then((response)=>{
-        response.json().then((data)=>{
+    fetch(l,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }).then((response)=>
+        response.json()).then((data)=>{
             message1.textContent = data.name
             message2.textContent = data.description
-        })
-    })
+        }).catch((error)=>{ message1.textContent = error })
 })
 create.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -73,15 +91,18 @@ create.addEventListener('submit',(e)=>{
     }
     message1.textContent = 'loading'
     const l = 'http://127.0.0.1:3000/toys'
-    fetch(l,{
+    fetch('http://127.0.0.1:3000/toys',{
         method: 'POST',
-        body: data
-    }).then((response)=>{
-        response.json().then((data)=>{
-            message1.textContent = data.name
-            message2.textContent = data.description
-        })
-    })
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then((response)=>
+    response.json()).then((data)=>{
+        message1.textContent = data.name
+        message2.textContent = data.description
+    }).catch((error)=>{ message1.textContent = error })
 })
 modify.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -92,15 +113,18 @@ modify.addEventListener('submit',(e)=>{
     }
     message1.textContent = 'loading'
     const l = 'http://127.0.0.1:3000/toys'
-    fetch(l,{
+    fetch('http://127.0.0.1:3000/toys',{
         method: 'PATCH',
-        body: data
-    }).then((response)=>{
-        response.json().then((data)=>{
-            message1.textContent = data.name
-            message2.textContent = data.description
-        })
-    })
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body:JSON.stringify(data)
+    }).then((response)=>
+    response.json()).then((data)=>{
+        message1.textContent = data.name
+        message2.textContent = data.description
+    }).catch((error)=>{ message1.textContent = error })
 })
 deletetoy.addEventListener('submit',(e)=>{
     e.preventDefault()
@@ -108,13 +132,16 @@ deletetoy.addEventListener('submit',(e)=>{
     message1.textContent = 'loading'
     const l = 'http://127.0.0.1:3000/toys?name=' + name
     fetch(l,{
-        method: 'DELETE'
-    }).then((response)=>{
-        response.json().then((data)=>{
-            message1.textContent = data.name
-            message2.textContent = data.description
-        })
-    })
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    }).then((response)=>
+    response.json()).then((data)=>{
+        message1.textContent = data.name
+        message2.textContent = data.description
+    }).catch((error)=>{ message1.textContent = error })
 })
 
 
