@@ -1,0 +1,32 @@
+{
+  "name": "klieba-app",
+  "version": "1.0.0",
+  "description": "app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quantumsoul/toyApplication.git"
+  },
+  "keywords": [
+    "node",
+    "js"
+  ],
+  "author": "Prakhar Nigam",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quantumsoul/toyApplication/issues"
+  },
+  "homepage": "https://github.com/quantumsoul/toyApplication#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.2.10",
+    "sharp": "^0.30.3",
+    "validator": "^10.9.0"
+  }
+}
